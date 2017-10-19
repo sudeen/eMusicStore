@@ -4,3 +4,7 @@
 eMusicStore.iml
 lib/
 
+src/main/resources/
+src/test/
+target/generated-sources/
+out
