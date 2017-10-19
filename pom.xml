@@ -10,6 +10,7 @@
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+        <!--JSTL stands for JSP Standard Tag Lib-->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
