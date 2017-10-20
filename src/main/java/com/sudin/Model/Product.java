@@ -1,9 +1,8 @@
 package com.sudin.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -11,14 +10,35 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String productId;
+
     private String productName;
-    private String productCatgory;
+
+    private String productCategory;
+
     private String productDescription;
+
     private double productPrice;
+
     private String productCondition;
+
     private String productStatus;
+
     private int unitStock;
+
     private String productManufacturer;
+
+    /*This @Transient annotation provides the function
+    of not making image column for image*/
+    @Transient
+    private MultipartFile productImage;
+
+    public MultipartFile getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(MultipartFile productImage) {
+        this.productImage = productImage;
+    }
 
     public String getProductId() {
         return productId;
@@ -36,12 +56,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductCatgory() {
-        return productCatgory;
+    public String getProductCategory() {
+        return productCategory;
     }
 
-    public void setProductCatgory(String productCatgory) {
-        this.productCatgory = productCatgory;
+    public void setProductCategory(String productCategory) {
+        this.productCategory = productCategory;
     }
 
     public String getProductDescription() {

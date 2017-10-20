@@ -25,7 +25,7 @@
                 <tr>
                     <td><img src="#" alt="image"/></td>
                     <td>${product.productName}</td>
-                    <td>${product.productCatgory}</td>
+                    <td>${product.productCategory}</td>
                     <td>${product.productCondition}</td>
                     <td>${product.productPrice} USD</td>
                     <td>
