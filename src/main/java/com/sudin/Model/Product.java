@@ -3,6 +3,7 @@ package com.sudin.Model;
 
 public class Product {
 
+    private String productId;
     private String productName;
     private String productCatgory;
     private String productDescription;
@@ -11,6 +12,14 @@ public class Product {
     private String productStatus;
     private int unitStock;
     private String productManufacturer;
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 
     public String getProductName() {
         return productName;
