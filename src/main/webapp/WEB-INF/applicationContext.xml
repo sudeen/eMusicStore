@@ -23,6 +23,11 @@
                 <prop key="hibernate.format_sql">true</prop>
             </props>
         </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.sudin.Model.Product</value>
+            </list>
+        </property>
         <property name="packagesToScan">
             <list>
                 <value>com.sudin</value>
