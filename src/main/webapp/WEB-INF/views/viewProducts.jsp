@@ -6,7 +6,7 @@
     <div class="container">
         <div class="page-header">
             <h1>Product Detail</h1>
-            <p class="lend">Detail information of the product</p>
+            <p class="lead">Detail information of the product</p>
         </div>
 
         <div class="container">

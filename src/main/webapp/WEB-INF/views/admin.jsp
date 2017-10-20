@@ -5,7 +5,7 @@
     <div class="container">
         <div class="page-header">
             <h1>Admin Portal</h1>
-            <p class="lend">This is Administrator Page</p>
+            <p class="lead">This is Administrator Page</p>
         </div>
         <h3>
             <a href="<c:url value="/admin/productInventory"/>">Product Inventory</a>

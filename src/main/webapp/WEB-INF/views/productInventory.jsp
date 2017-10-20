@@ -7,7 +7,7 @@
     <div class="container">
         <div class="page-header">
             <h1>Product Inventory Page</h1>
-            <p class="lend">This is the Product Inventory Page</p>
+            <p class="lead">This is the Product Inventory Page</p>
         </div>
 
         <table class="table table-stripped table-hover">

@@ -52,4 +52,16 @@ public class HomeController {
         return "productInventory";
     }
 
+    @RequestMapping("/admin/productInventory/addProduct")
+    public String addProduct(Model model){
+        Product product= new Product();
+        product.setProductCatgory("Instruments");
+        product.setProductStatus("Active");
+        product.setProductCondition("New");
+
+        model.addAttribute("product",product);
+
+        return "addProduct";
+    }
+
 }
