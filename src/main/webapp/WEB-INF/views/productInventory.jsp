@@ -14,8 +14,8 @@
             <thead>
             <tr class="bg-success">
                 <th>Photo Thumb</th>
-                <th>Product Name</th>
                 <th>Category</th>
+                <th>Product Name</th>
                 <th>Condition</th>
                 <th>Price</th>
                 <th></th>
@@ -24,8 +24,8 @@
             <c:forEach items="${products}" var="product">
                 <tr>
                     <td><img src="#" alt="image"/></td>
-                    <td>${product.productName}</td>
                     <td>${product.productCategory}</td>
+                    <td>${product.productName}</td>
                     <td>${product.productCondition}</td>
                     <td>${product.productPrice} USD</td>
                     <td>

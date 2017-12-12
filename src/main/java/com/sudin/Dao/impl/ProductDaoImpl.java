@@ -1,10 +1,12 @@
 package com.sudin.Dao.impl;
 
+import com.google.gson.Gson;
 import com.sudin.Dao.ProductDao;
 import com.sudin.Model.Product;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
+import org.hibernate.type.DoubleType;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,30 +19,65 @@ public class ProductDaoImpl implements ProductDao {
 
     @Autowired
     private SessionFactory sessionFactory;
+    Session session;
 
     public void addProduct(Product product) {
-        Session session = sessionFactory.getCurrentSession();
-        session.saveOrUpdate(product);
-        session.flush();
+        Session session = null;
+        try {
+            session=sessionFactory.openSession();
+            session.save(product);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
-    public Product getProductById(String id) {
-        Session session = sessionFactory.getCurrentSession();
-        Product product = (Product) session.get(Product.class, id);
-        session.flush();
+    public Product getProductById(int id) {
+        Product product = null;
+        try {
+            session=sessionFactory.openSession();
+            session = sessionFactory.getCurrentSession();
+            product = (Product) session.get(Product.class, id);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
 
         return product;
     }
 
     public List<Product> getAllProduct() {
-        Session session=sessionFactory.getCurrentSession();
-        Query query=session.createQuery("from Product");
-        List<Product> productList=query.list();
-        session.flush();
-        return productList;
-    }
+        List<Product> productList= null;
+        try {
+            session=sessionFactory.openSession();
+            String sql="SELECT * FROM PRODUCT";
+            SQLQuery query=session.createSQLQuery(sql);
+//            Query query=session.createQuery("FROM Product");
+            System.out.println("query output " +new Gson().toJson( query.list()));
+            query.addScalar("ProductId", IntegerType.INSTANCE);
+            query.addScalar("ProductCategory", StringType.INSTANCE);
+            query.addScalar("ProductCondition", StringType.INSTANCE);
+            query.addScalar("ProductDescription", StringType.INSTANCE);
+            query.addScalar("ProductManufacturer", StringType.INSTANCE);
+            query.addScalar("ProductName", StringType.INSTANCE);
+            query.addScalar("ProductPrice", DoubleType.INSTANCE);
+            query.addScalar("ProductStatus", StringType.INSTANCE);
+            query.addScalar("UnitStock", IntegerType.INSTANCE);
+            productList = query.list();
+            return productList;
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+        //session.flush();
+   }
 
-    public void deleteProduct(String id) {
+    public void deleteProduct(int id) {
         Session session=sessionFactory.getCurrentSession();
         session.delete(getProductById(id));
         session.flush();

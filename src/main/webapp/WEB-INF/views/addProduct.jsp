@@ -12,19 +12,21 @@
 
         <form:form action="${pageContext.request.contextPath}/admin/productInventory/addProduct" method="post"
                    commandName="product" enctype="multipart/form-data">
+
+
         <div class="form-group">
-            <label for="name">Name</label> <form:errors path="productName" cssStyle="color: #ff0000;" />
+            <label for="name">Name</label>
             <form:input path="productName" id="name" class="form-Control"/>
         </div>
 
         <div class="form-group">
             <label for="category">Category</label>
-            <label class="checkbox-inline"><form:radiobutton path="productCategory" id="category"
-                                                             value="instrument" />Instrument</label>
-            <label class="checkbox-inline"><form:radiobutton path="productCategory" id="category"
-                                                             value="record" />Record</label>
-            <label class="checkbox-inline"><form:radiobutton path="productCategory" id="category"
-                                                             value="accessory" />Accessory</label>
+            <label class="checkbox-inline"></label><form:radiobutton path="productCategory" id="category"
+                                                                     value="instrument"/>Instrument
+            <label class="checkbox-inline"></label><form:radiobutton path="productCategory" id="category"
+                                                                     value="record"/>Record
+            <label class="checkbox-inline"></label><form:radiobutton path="productCategory" id="category"
+                                                                     value="accessory"/>Accessory
         </div>
 
         <div class="form-group">
@@ -33,30 +35,30 @@
         </div>
 
         <div class="form-group">
-            <label for="price">Price</label>  <form:errors path="productPrice" cssStyle="color: #ff0000;" />
+            <label for="price">Price</label> <form:errors path="productPrice" cssStyle="color: #ff0000;"/>
             <form:input path="productPrice" id="price" class="form-Control"/>
         </div>
 
         <div class="form-group">
             <label for="condition">Condition</label>
             <label class="checkbox-inline"><form:radiobutton path="productCondition" id="condition"
-                                                             value="new" />New</label>
+                                                             value="new"/>New</label>
             <label class="checkbox-inline"><form:radiobutton path="productCondition" id="condition"
-                                                             value="used" />Used</label>
+                                                             value="used"/>Used</label>
         </div>
 
         <div class="form-group">
             <label for="status">Status</label>
             <label class="checkbox-inline"><form:radiobutton path="productStatus" id="status"
-                                                             value="active" />Active</label>
+                                                             value="active"/>Active</label>
             <label class="checkbox-inline"><form:radiobutton path="productStatus" id="status"
-                                                             value="inactive" />Inactive</label>
+                                                             value="inactive"/>Inactive</label>
         </div>
 
         <div class="form-group">
-            <label for="unitStock">Unit In Stock</label>  <form:errors path="unitStock"
-                                                                         cssStyle="color: #ff0000;" />
-            <form:input path="unitStock" id="unitStock" class="form-Control"/>
+            <label for="unitInStock">Unit In Stock</label> <form:errors path="unitStock"
+                                                                        cssStyle="color: #ff0000;"/>
+            <form:input path="unitStock" id="unitInStock" class="form-Control"/>
         </div>
 
         <div class="form-group">
@@ -64,10 +66,10 @@
             <form:input path="productManufacturer" id="manufacturer" class="form-Control"/>
         </div>
 
-        <%--<div class="form-group">--%>
+            <%--<div class="form-group">--%>
             <%--<label class="control-label" for="productImage">Upload Picture</label>--%>
             <%--<form:input id="productImage" path="productImage" type="file" class="form:input-large" />--%>
-        <%--</div>--%>
+            <%--</div>--%>
 
         <br><br>
         <input type="submit" value="submit" class="btn btn-success">

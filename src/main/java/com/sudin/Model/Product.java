@@ -1,30 +1,34 @@
 package com.sudin.Model;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import java.io.Serializable;
 
 @Entity
-public class Product {
+public class Product implements Serializable {
+
+    private static final long serialVersionUID = -3532377236419382983L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String productId;
+    private int productId;
 
+    @NotEmpty(message = "The product name must not be null.")
     private String productName;
-
     private String productCategory;
-
     private String productDescription;
 
+    @Min(value = 0, message = "The product price must no be less then zero.")
     private double productPrice;
-
     private String productCondition;
-
     private String productStatus;
 
+    @Min(value = 0, message = "The product price must no be less then zero.")
     private int unitStock;
-
     private String productManufacturer;
 
     /*This @Transient annotation provides the function
@@ -40,11 +44,11 @@ public class Product {
         this.productImage = productImage;
     }
 
-    public String getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
