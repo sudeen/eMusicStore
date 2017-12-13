@@ -1,6 +1,5 @@
 package com.sudin.Controllers;
 
-import com.google.gson.Gson;
 import com.sudin.Dao.ProductDao;
 import com.sudin.Model.Product;
 import com.sudin.Service.ProductService;
@@ -14,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -86,25 +88,39 @@ public class HomeController {
     @RequestMapping(value = "/admin/productInventory/addProduct", method = RequestMethod.POST)
     public String addProductPost(@ModelAttribute("product") Product product,
                                  HttpServletRequest request,Model model) {
-        System.out.println("add product phase");
         productDao.addProduct(product);
-        System.out.println("product " +new Gson().toJson(product));
+//        System.out.println("add product phase");
+//        System.out.println("product " +new Gson().toJson(product));
 
-//
-//        MultipartFile productImage=product.getProductImage();
-//        String rootDirectory=request.getSession().getServletContext().getRealPath("/");
-//        /*Here to use this Paths.get function I needed to change the language level to 7*/
-//        path= Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\"+product.getProductId()+".png");
-//
-//        if (productImage!=null && !productImage.isEmpty()){
-//            try{
-//                productImage.transferTo(new File(path.toString()));
-//            }
-//            catch (Exception e){
-//                e.printStackTrace();
-//                throw new RuntimeException("Product image saving failed");
-//            }
-//        }
+/*        MultipartFile productImage=product.getProductImage();
+        String rootDirectory=request.getSession().getServletContext().getRealPath("/");
+//        Here to use this Paths.get function I needed to change the language level to 7
+        path= Paths.get(rootDirectory + "\\webapp\\WEB-INF\\resources\\images\\"+product.getProductId()+".png");
+
+        if (productImage!=null && !productImage.isEmpty()){
+            try{
+                productImage.transferTo(new File(path.toString()));
+            }
+            catch (Exception e){
+                e.printStackTrace();
+                throw new RuntimeException("Product image saving failed",e);
+            }
+        }*/
+
+        System.out.println("product id " +product.getProductId());
+        MultipartFile productImage=product.getProductImage();
+
+            try{
+                byte[] bytes = productImage.getBytes();
+                String name = product.getProductId() + ".png";
+                BufferedOutputStream stream = new BufferedOutputStream(
+                        new FileOutputStream(new File("/home/s-k-ii-p-s/Java-Apps/eMusicStore/src/main/webapp/WEB-INF/resources/images/" + name)));
+                stream.write(bytes);
+                stream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         model.addAttribute("product",product);
 
         return "redirect:/admin/productInventory";

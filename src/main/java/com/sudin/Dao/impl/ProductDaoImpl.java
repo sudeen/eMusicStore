@@ -32,7 +32,11 @@ public class ProductDaoImpl implements ProductDao {
 //        } finally {
 //            session.close();
 //        }
-        sessionFactory.getCurrentSession().saveOrUpdate(product);
+        try {
+            sessionFactory.getCurrentSession().save(product);
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Product> getProductById(int id) {
