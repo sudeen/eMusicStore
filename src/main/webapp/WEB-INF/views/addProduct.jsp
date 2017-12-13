@@ -9,10 +9,10 @@
 
             <p class="lead">Fill the below information to add a product:</p>
         </div>
-
-        <form:form action="${pageContext.request.contextPath}/admin/productInventory/addProduct" method="post"
-                   commandName="product" enctype="multipart/form-data">
-
+        <c:url var="addProduct" value="/admin/productInventory/addProduct"></c:url>
+        <%--<form:form action="${pageContext.request.contextPath}/admin/productInventory/addProduct" method="post" commandName="product" enctype="multipart/form-data">--%>
+        <%--<form:form action="/admin/productInventory/addProduct" method="post" commandName="product" enctype="multipart/form-data">--%>
+        <form:form action="${addProduct}" commandName="product">
 
         <div class="form-group">
             <label for="name">Name</label>
@@ -21,12 +21,12 @@
 
         <div class="form-group">
             <label for="category">Category</label>
-            <label class="checkbox-inline"></label><form:radiobutton path="productCategory" id="category"
-                                                                     value="instrument"/>Instrument
-            <label class="checkbox-inline"></label><form:radiobutton path="productCategory" id="category"
-                                                                     value="record"/>Record
-            <label class="checkbox-inline"></label><form:radiobutton path="productCategory" id="category"
-                                                                     value="accessory"/>Accessory
+            <label class="checkbox-inline"><form:radiobutton path="productCategory" id="category"
+                                                             value="instrument"/>Instrument</label>
+            <label class="checkbox-inline"><form:radiobutton path="productCategory" id="category"
+                                                             value="record"/>Record</label>
+            <label class="checkbox-inline"><form:radiobutton path="productCategory" id="category"
+                                                             value="accessory"/>Accessory</label>
         </div>
 
         <div class="form-group">

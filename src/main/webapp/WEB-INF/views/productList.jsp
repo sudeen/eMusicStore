@@ -40,7 +40,7 @@
                         <td>${product.ProductManufacturer}</td>
                         <td>${product.ProductStatus}</td>
                         <td>${product.UnitStock}</td>
-                        <td><a href="<c:url value="/productList/viewProducts/${product.Id}"/>"><span class="glyphicon glyphicon-info-sign"></span></a></td>
+                        <td><a href="<spring:url value="/productList/viewProducts/${product.Id}"/>"><span class="glyphicon glyphicon-info-sign"></span></a></td>
                     </tr>
                 </c:forEach>
                 <%--</tbody>--%>

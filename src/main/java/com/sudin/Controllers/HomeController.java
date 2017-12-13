@@ -63,7 +63,7 @@ public class HomeController {
 
     @RequestMapping("/admin/productInventory")
     public String productInventory(Model model) {
-        List<Product> productList = productDao.getAllProduct();
+        List<Map<String, Object>> productList = productService.productList();
         model.addAttribute("products", productList);
 
         return "productInventory";
@@ -73,9 +73,10 @@ public class HomeController {
     @RequestMapping("/admin/productInventory/addProduct")
     public String addProduct(Model model) {
         Product product = new Product();
-        product.setProductCategory("Instruments");
-        product.setProductStatus("Active");
+        product.setProductCategory("Instrument");
         product.setProductCondition("New");
+        product.setProductStatus("Active");
+//        productDao.addProduct(product);
 
         model.addAttribute("product", product);
 
@@ -85,6 +86,7 @@ public class HomeController {
     @RequestMapping(value = "/admin/productInventory/addProduct", method = RequestMethod.POST)
     public String addProductPost(@ModelAttribute("product") Product product,
                                  HttpServletRequest request,Model model) {
+        System.out.println("add product phase");
         productDao.addProduct(product);
         System.out.println("product " +new Gson().toJson(product));
 
@@ -103,7 +105,7 @@ public class HomeController {
 //                throw new RuntimeException("Product image saving failed");
 //            }
 //        }
-        model.addAttribute("products",product);
+        model.addAttribute("product",product);
 
         return "redirect:/admin/productInventory";
     }

@@ -1,6 +1,5 @@
 package com.sudin.Dao.impl;
 
-import com.google.gson.Gson;
 import com.sudin.Dao.ProductDao;
 import com.sudin.Model.Product;
 import org.hibernate.*;
@@ -20,17 +19,20 @@ public class ProductDaoImpl implements ProductDao {
     @Autowired
     private SessionFactory sessionFactory;
     Session session;
+    Transaction transaction;
 
     public void addProduct(Product product) {
-        Session session = null;
-        try {
-            session=sessionFactory.openSession();
-            session.save(product);
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+//        try {
+//            session=sessionFactory.openSession();
+//            transaction = session.beginTransaction();
+//            session.save(product);
+//            transaction.commit();
+//        } catch (HibernateException e) {
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
+        sessionFactory.getCurrentSession().saveOrUpdate(product);
     }
 
     public List<Product> getProductById(int id) {
@@ -67,7 +69,7 @@ public class ProductDaoImpl implements ProductDao {
             String sql="SELECT * FROM PRODUCT";
             SQLQuery query=session.createSQLQuery(sql);
 //            Query query=session.createQuery("FROM Product");
-            System.out.println("query output " +new Gson().toJson( query.list()));
+//            System.out.println("query output " +new Gson().toJson( query.list()));
             query.addScalar("ProductId", IntegerType.INSTANCE);
             query.addScalar("ProductCategory", StringType.INSTANCE);
             query.addScalar("ProductCondition", StringType.INSTANCE);
@@ -89,8 +91,13 @@ public class ProductDaoImpl implements ProductDao {
    }
 
     public void deleteProduct(int id) {
-        Session session=sessionFactory.getCurrentSession();
-        session.delete(getProductById(id));
-        session.flush();
+//        Session session=sessionFactory.getCurrentSession();
+//        session.delete(getProductById(id));
+//        session.flush();
+        Product product = (Product) sessionFactory.getCurrentSession().load(
+                Product.class, id);
+        if (null != product) {
+            this.sessionFactory.getCurrentSession().delete(product);
+        }
     }
 }
