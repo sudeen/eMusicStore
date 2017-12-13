@@ -45,4 +45,31 @@ public class ProductServiceImpl implements ProductService {
         }
         return finalList;
     }
+
+    @Override
+    public List<Map<String, Object>> productById(int id) {
+        List<Product> response=productDao.getProductById(id);
+        List<Map<String,Object>> finalList = new ArrayList<>();
+        for (Object object : response) {
+            Object[] objects = (Object[]) object;
+            String productCategory = (String) objects[0];
+            String productCondition = (String) objects[1];
+            String productDescription = (String) objects[2];
+            String productManufacturer = (String) objects[3];
+            String productName = (String) objects[4];
+            Double productPrice = (Double) objects[5];
+            String productStatus = (String) objects[6];
+            Integer unitStock = (Integer) objects[7];
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("ProductName", productName);
+            map.put("ProductCategory", productCategory);
+            map.put("ProductCondition", productCondition);
+            map.put("ProductDescription", productDescription);
+            map.put("ProductManufacturer", productManufacturer);
+            map.put("ProductPrice", productPrice);
+            map.put("ProductStatus", productStatus);
+            map.put("UnitStock", unitStock);
+            finalList.add(map);
+        }
+        return finalList;    }
 }

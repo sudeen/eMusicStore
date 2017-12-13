@@ -6,4 +6,6 @@ import java.util.Map;
 public interface ProductService {
 
     List<Map<String, Object>> productList();
+
+    List<Map<String, Object>> productById(int id);
 }

@@ -29,25 +29,26 @@
                 </tr>
 
                 <%--<tbody>--%>
-                <c:forEach items="${products}" var="productss">
+                <c:forEach items="${products}" var="product">
                     <tr>
                         <td><img src="#"/></td>
-                        <td>${productss.ProductName}</td>
-                        <td>${productss.ProductCategory}</td>
-                        <td>${productss.ProductCondition}</td>
-                        <td>${productss.ProductPrice} USD</td>
-                        <td>${productss.ProductDescription}</td>
-                        <td>${productss.ProductManufacturer}</td>
-                        <td>${productss.ProductStatus}</td>
-                        <td>${productss.UnitStock}</td>
-                        <td><a href="<spring:url value="/productList/viewProduct/${product.productId}" />"
-                        ><span class="glyphicon glyphicon-info-sign"></span></a></td>
+                        <td>${product.ProductName}</td>
+                        <td>${product.ProductCategory}</td>
+                        <td>${product.ProductCondition}</td>
+                        <td>${product.ProductPrice} USD</td>
+                        <td>${product.ProductDescription}</td>
+                        <td>${product.ProductManufacturer}</td>
+                        <td>${product.ProductStatus}</td>
+                        <td>${product.UnitStock}</td>
+                        <td><a href="<c:url value="/productList/viewProducts/${product.Id}"/>"><span class="glyphicon glyphicon-info-sign"></span></a></td>
                     </tr>
                 </c:forEach>
                 <%--</tbody>--%>
             </table>
         </div>
+
+        <%@include file="/WEB-INF/views/template/footer.jsp" %>
+
     </div>
 
 
-    <%@include file="/WEB-INF/views/template/footer.jsp" %>

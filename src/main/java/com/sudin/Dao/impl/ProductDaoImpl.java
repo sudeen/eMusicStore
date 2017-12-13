@@ -33,20 +33,31 @@ public class ProductDaoImpl implements ProductDao {
         }
     }
 
-    public Product getProductById(int id) {
+    public List<Product> getProductById(int id) {
         Product product = null;
         try {
             session=sessionFactory.openSession();
-            session = sessionFactory.getCurrentSession();
-            product = (Product) session.get(Product.class, id);
+//            session = sessionFactory.getCurrentSession();
+            String sql="SELECT * FROM Product p WHERE p.productId= :productId";
+            SQLQuery query=session.createSQLQuery(sql);
+            query.setParameter("productId",id);
+//            query.addScalar("ProductId", IntegerType.INSTANCE);
+            query.addScalar("ProductCategory", StringType.INSTANCE);
+            query.addScalar("ProductCondition", StringType.INSTANCE);
+            query.addScalar("ProductDescription", StringType.INSTANCE);
+            query.addScalar("ProductManufacturer", StringType.INSTANCE);
+            query.addScalar("ProductName", StringType.INSTANCE);
+            query.addScalar("ProductPrice", DoubleType.INSTANCE);
+            query.addScalar("ProductStatus", StringType.INSTANCE);
+            query.addScalar("UnitStock", IntegerType.INSTANCE);
+//            product = (Product) session.get(Product.class, id);
+            return query.list();
         } catch (HibernateException e) {
             e.printStackTrace();
             return null;
         } finally {
             session.close();
         }
-
-        return product;
     }
 
     public List<Product> getAllProduct() {

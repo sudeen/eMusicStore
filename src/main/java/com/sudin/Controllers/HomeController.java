@@ -46,11 +46,12 @@ public class HomeController {
         return "productList";
     }
 
-    @RequestMapping("/productList/viewProducts/{productId}")
+    @RequestMapping(value = "/productList/viewProducts/{productId}")
     public String viewProduct(@PathVariable int productId,
-                              Model model) throws IOException {
-        Product product = productDao.getProductById(productId);
-        model.addAttribute("product",product);
+                              Model model) {
+        List<Map<String, Object>> products=productService.productById(productId);
+//        Product product = productDao.getProductById(productId);
+        model.addAttribute("product",products);
 
         return "viewProducts";
     }
